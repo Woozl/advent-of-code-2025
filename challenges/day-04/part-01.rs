@@ -22,7 +22,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             if !*col {
                 continue;
             }
-            
+
             let mut num_rolls_surrounding: usize = 0;
 
             for dir in dirs {

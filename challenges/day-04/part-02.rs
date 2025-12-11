@@ -27,8 +27,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 fn remove_rolls(grid: &mut Vec<Vec<bool>>) -> usize {
     let mut sum = 0;
-    
-        #[rustfmt::skip]
+
+    #[rustfmt::skip]
     let dirs: &[(isize, isize); 8] = &[
         (-1, -1), (0, -1), (1, -1),
         (-1,  0),          (1,  0),
@@ -42,7 +42,7 @@ fn remove_rolls(grid: &mut Vec<Vec<bool>>) -> usize {
             if !*col {
                 continue;
             }
-            
+
             let mut num_rolls_surrounding: usize = 0;
 
             for dir in dirs {
