@@ -1,0 +1,50 @@
+use std::{fs, path::Path};
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let input = fs::read_to_string(Path::new("./challenges/day-04/input.txt"))?;
+
+    let grid: Vec<Vec<bool>> = input
+        .lines()
+        .map(|l| l.chars().map(|c| c == '@').collect())
+        .collect();
+
+    #[rustfmt::skip]
+    let dirs: &[(isize, isize); 8] = &[
+        (-1, -1), (0, -1), (1, -1),
+        (-1,  0),          (1,  0),
+        (-1,  1), (0,  1), (1,  1),
+    ];
+
+    let mut accessible_rolls: usize = 0;
+
+    for (row_idx, row) in grid.iter().enumerate() {
+        for (col_idx, col) in row.iter().enumerate() {
+            if !*col {
+                continue;
+            }
+            
+            let mut num_rolls_surrounding: usize = 0;
+
+            for dir in dirs {
+                let x: isize = col_idx as isize + dir.0;
+                let y: isize = row_idx as isize + dir.1;
+
+                if x < 0 || x >= row.len() as isize || y < 0 || y >= grid.len() as isize {
+                    continue;
+                }
+
+                if *col && grid[y as usize][x as usize] {
+                    num_rolls_surrounding += 1;
+                }
+            }
+
+            if num_rolls_surrounding < 4 {
+                accessible_rolls += 1;
+            }
+        }
+    }
+
+    println!("{accessible_rolls:?}");
+
+    Ok(())
+}
