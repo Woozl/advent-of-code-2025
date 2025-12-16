@@ -18,7 +18,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let mut current_char = operands_chars[0];
         let mut starting_idx: usize = 0;
         let mut width: usize = 1;
-        
+
         for (i, c) in (&operands_chars[1..]).iter().enumerate() {
             if *c != ' ' {
                 list.push((current_char, starting_idx, width - 1));
@@ -41,11 +41,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let mut num_str = String::from("");
             for row_idx in 0..grid.len() {
                 let c = grid[row_idx][col_idx];
-                if  c != ' ' {
+                if c != ' ' {
                     num_str.push(c);
                 }
             }
-            
+
             let num = num_str.parse::<usize>().unwrap();
             if operand == '*' {
                 result *= num;
